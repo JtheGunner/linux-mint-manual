@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux Mint — Überlebenshandbuch</title>
+<style>
+:root { --mint:#87CF3E; --mint-dark:#5a9e2b; --ink:#24292f; --muted:#6a737d; }
+* { box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  max-width:880px; margin:0 auto; padding:24px 28px 60px; line-height:1.65; color:var(--ink); background:#fff; }
+header { border-bottom:4px solid var(--mint); padding-bottom:18px; margin-bottom:28px; }
+header .title { font-size:2em; margin:0 0 6px; }
+header .subtitle { font-size:1.15em; color:var(--mint-dark); margin:0 0 4px; font-weight:600; }
+header .meta { color:var(--muted); font-size:.9em; margin:0; }
+h1 { font-size:1.7em; border-bottom:3px solid var(--mint); padding-bottom:8px; margin-top:1.6em; }
+h2 { color:#3f7a1d; border-left:5px solid var(--mint); padding-left:12px; margin-top:2.2em; font-size:1.35em; }
+h3 { margin-top:1.6em; font-size:1.1em; }
+p, li { margin:.55em 0; }
+pre { background:#1e2430; color:#dce4ee; padding:16px 20px; border-radius:10px; overflow-x:auto;
+  font-size:.84em; line-height:1.5; margin:1em 0; }
+pre code { background:none; padding:0; color:inherit; font-size:1em; }
+code { background:#eef3ea; padding:2px 6px; border-radius:5px; font-size:.88em;
+  font-family:'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; }
+table { border-collapse:collapse; width:100%; margin:1.1em 0; font-size:.93em; }
+th { background:#f2f7ec; text-align:left; }
+td, th { border:1px solid #d8dee4; padding:7px 12px; }
+tr:nth-child(even) td { background:#fafcf7; }
+a { color:var(--mint-dark); text-decoration:none; } a:hover { text-decoration:underline; }
+hr { border:none; border-top:2px solid #e6ebe0; margin:2.4em 0; }
+footer { margin-top:3em; padding-top:14px; border-top:2px solid #e6ebe0; color:var(--muted); font-size:.85em; }
+@media print {
+  body { max-width:100%; padding:0; font-size:11pt; }
+  pre { background:#f4f6f2 !important; color:#111 !important; border:1px solid #ccc; white-space:pre-wrap; }
+  pre code { color:#111 !important; }
+  h2, h3 { page-break-after:avoid; } pre, table { page-break-inside:avoid; }
+  a { color:#3f7a1d; }
+}
+</style>
+</head>
+<body>
+<header>
+  <p class="title">🐧 Linux Mint — Überlebenshandbuch</p>
+  <p class="subtitle">Dein Wegweiser von Windows in die freie Welt</p>
+  <p class="meta">Für alle, die technisch affin sind, aber noch nie mit Unix zu tun hatten · Stand: September 2026</p>
+</header>
+<h2 id="inhaltsverzeichnis">Inhaltsverzeichnis</h2>
+<ol><li><a href="#1-der-mentale-umstieg">Der mentale Umstieg</a></li><li><a href="#2-so-funktioniert-linux-in-60-sekunden">So funktioniert Linux (in 60 Sekunden)</a></li><li><a href="#3-das-dateisystem-verstehen">Das Dateisystem verstehen</a></li><li><a href="#4-das-terminal--dein-neues-werkzeug">Das Terminal — dein neues Werkzeug</a></li><li><a href="#5-programme-installieren--entfernen">Programme installieren &amp; entfernen</a></li><li><a href="#6-benutzer-rechte--sudo">Benutzer, Rechte &amp; sudo</a></li><li><a href="#7-windows--mint-umrechnungstabelle">Windows → Mint: Umrechnungstabelle</a></li><li><a href="#8-die-ersten-10-dinge-nach-der-installation">Die ersten 10 Dinge nach der Installation</a></li><li><a href="#9-häufige-stolperfallen">Häufige Stolperfallen</a></li><li><a href="#10-text-suchen-grep--find">Text suchen: grep &amp; find</a></li><li><a href="#11-dein-erstes-skript">Dein erstes Skript</a></li><li><a href="#12-wo-du-hilfe-findest">Wo du Hilfe findest</a></li><li><a href="#13-lernplan-für-die-erste-woche">Lernplan für die erste Woche</a></li><li><a href="#14-taschenkarte-die-wichtigsten-befehle">Taschenkarte: Die wichtigsten Befehle</a></li></ol>
+<hr>
+<h2 id="1-der-mentale-umstieg">1. Der mentale Umstieg</h2>
+<p>Windows und Linux denken grundlegend anders:</p>
+<table><tr><th></th><th>Windows</th><th>Linux Mint</th></tr><tr><td>Philosophie</td><td>GUI zuerst, Terminal ist das Werkzeug für Nerds</td><td>Terminal und GUI sind gleichberechtigt</td></tr><tr><td>Programme</td><td>Installieren sich, wo sie wollen (Programme, AppData, …)</td><td>Standardorte (<code>/usr/bin</code>, <code>/opt</code>) — alles ist nachvollziehbar</td></tr><tr><td>Einstellungen</td><td>Registry (binär, versteckt, fragil)</td><td>Klartext-Dateien (<code>/etc</code>, <code>~/.config</code>) — lesbar und editierbar!</td></tr><tr><td>Laufwerke</td><td>C:, D:, E: …</td><td>Ein einziger Baum, der bei <code>/</code> beginnt</td></tr><tr><td>Admin-Rechte</td><td>Du bist immer „Administrator“ (UAC)</td><td>Normaler User + <code>sudo</code> für Admin-Aufgaben</td></tr><tr><td>Updates</td><td>Windows Update (ein Button, viel Kontrolle abgeben)</td><td>Paketmanager (<code>apt</code>) + Update-Applet — du entscheidest, was aktualisiert wird</td></tr></table>
+<p><strong>Die wichtigste Erkenntnis:</strong> Unter Linux ist das Terminal kein „Power-User-Zusatz“ — es *ist* der normale Arbeitsweg. Wenn du dich daran gewöhnt hast, bist du schneller als mit jeder GUI. Und: Alles ist skriptbar. Was du einmal manuell machst, kannst du für immer automatisieren.</p>
+<p><strong>Die gute Nachricht:</strong> Linux Mint ist die am stärksten an Windows orientierte Distribution. Der Desktop (Cinnamon) sieht und fühlt sich wie ein klassisches Windows-Desktop an: Startmenü, Taskleiste, Systemtray. Du bist ab Tag 1 produktiv — den Rest lernst du in deinem Tempo.</p>
+<hr>
+<h2 id="2-so-funktioniert-linux-in-60-sekunden">2. So funktioniert Linux (in 60 Sekunden)</h2>
+<p>Da du technisch affin bist, hier die Architektur in einem Rutsch:</p>
+<ul><li><strong>Kernel</strong> — das Herzstück. Verwaltet CPU, RAM, Festplatten, Geräte. Bei Mint: der Linux-Kernel (Version prüfbar mit <code>uname -a</code>).</li><li><strong>systemd</strong> — startet beim Booten alle Dienste und überwacht sie (wie der Windows-Dienst-Manager, aber mächtiger).</li><li><strong>Shell (Bash)</strong> — dein Übersetzer. Du tippst Text, die Shell zerlegt ihn in Befehle und ruft Programme auf. Alles, was du im Terminal tust, läuft über sie.</li><li><strong>Userland</strong> — alle Programme (Browser, Office, …) laufen als normale Prozesse *über* dem Kernel.</li></ul>
+<p><strong>Das „Everything is a file“-Prinzip:</strong> Unter Linux ist (fast) alles eine Datei — auch Geräte (<code>/dev/sda</code> = deine Festplatte, <code>/dev/null</code> = die Leere) und sogar laufende Prozesse (jeder Prozess hat einen Ordner unter <code>/proc/</code>). Das klingt seltsam, ist aber der Schlüssel zum Verständnis: Wenn du Dateien lesen und schreiben kannst, kannst du das System steuern.</p>
+<hr>
+<h2 id="3-das-dateisystem-verstehen">3. Das Dateisystem verstehen</h2>
+<p>Es gibt keine Laufwerke. Alles hängt an einem einzigen Baum, der bei <code>/</code> (Root) beginnt:</p>
+<pre><code>/                     ← die Wurzel (das „C:\“ — aber hier ist ALLES drin)
+├── home/             ← Benutzerordner (dein „C:\Users“)
+│   └── deinname/     ← DEIN Home: Dokumente, Downloads, Bilder …
+├── etc/              ← Systemeinstellungen (die „Registry“ — aber lesbarer Text!)
+├── usr/
+│   ├── bin/          ← die meisten Programme leben hier (nicht anfassen)
+│   └── share/        ← Programm-Daten, Dokumentation
+├── var/
+│   ├── log/          ← Protokolle (wenn was kaputt ist: hier nachschauen)
+│   └── tmp/          ← temporäre Dateien
+├── tmp/              ← temporäre Dateien (beim Neustart geleert)
+└── dev/              ← Geräte (Festplatten, Tastatur, … als „Dateien“)</code></pre>
+<p><strong>Regeln, die du kennen musst:</strong></p>
+<ul><li><strong>Versteckte Dateien beginnen mit einem Punkt</strong>: <code>.bashrc</code>, <code>.config</code> — sichtbar machst du sie mit <code>ls -a</code>. Deine persönlichen Einstellungen liegen in <code>~/.config/</code> (das <code>~</code> ist dein Home-Verzeichnis).</li><li><strong>Groß-/Kleinschreibung zählt</strong>: <code>Datei.txt</code> und <code>datei.txt</code> sind zwei verschiedene Dateien. Das ist der häufigste Fehlerquelle für Windows-User — in Pfade, Dateinamen und Befehlen.</li><li><strong>Pfade</strong>: Absolut beginnt mit <code>/</code> (<code>/home/deinname/dokumente</code>), relativ bezieht sich auf den aktuellen Ort (<code>./dokumente</code>). <code>~</code> = dein Home.</li><li><strong>Kein „Dieser PC“</strong>: Es gibt keine Übersicht aller Laufwerke — aber <code>ls /</code> zeigt dir die oberste Ebene.</li><li><strong>Externe Laufwerke &amp; USB-Sticks</strong>: Werden automatisch eingebunden (meist unter <code>/media/deinname/</code>) und erscheinen im Dateimanager bzw. auf dem Desktop — kein Laufwerksbuchstabe nötig. Vor dem Ausstecken per Rechtsklick → „Auswerfen“ trennen (wie unter Windows).</li></ul>
+<hr>
+<h2 id="4-das-terminal--dein-neues-werkzeug">4. Das Terminal — dein neues Werkzeug</h2>
+<p>Öffnen mit <strong>Strg+Alt+T</strong> oder über das Startmenü. Was du siehst, ist die Shell (Bash): Sie nimmt Textbefehle entgegen, führt sie aus und zeigt dir das Ergebnis.</p>
+<h3>4.1 Orientieren</h3>
+<pre><code>pwd              # Wo bin ich? (print working directory)
+ls               # Was ist hier?
+ls -la           # Alles, inkl. versteckter Dateien + Details
+cd /home/deinname   # ins Home-Verzeichnis
+cd ..            # eine Ebene hoch
+cd -             # zurück zum vorherigen Ort (super praktisch)</code></pre>
+<h3>4.2 Mit Dateien arbeiten</h3>
+<pre><code>mkdir projekt            # Ordner anlegen
+cp datei.txt backup/     # kopieren (copy)
+mv alt neu               # verschieben ODER umbenennen (move)
+rm datei.txt             # löschen — IM TERMINAL GIBT ES KEINEN MÜLL!
+rm -r ordner/            # Ordner inkl. Inhalt löschen (vorsichtig!)
+cat datei.txt            # Dateiinhalt im Terminal anzeigen
+less datei.txt           # lange Datei blättern (q = zurück)</code></pre>
+<h3>4.3 Die Tastenkürzel, die alles verändern</h3>
+<table><tr><th>Kürzel</th><th>Wirkung</th><th>Windows-Äquivalent</th></tr><tr><td><strong>Tab</strong></td><td>Vervollständigt Dateinamen/Befehle — 2 Buchstaben tippen, Tab drücken</td><td>*(existiert nicht)*</td></tr><tr><td><strong>Strg+R</strong></td><td>Befehlshistorie durchsuchen — paar Buchstaben tippen, Strg+R halten</td><td>*(existiert nicht)*</td></tr><tr><td><strong>↑ / ↓</strong></td><td>vorheriger/nächster Befehl</td><td>wie in der CMD</td></tr><tr><td><strong>Strg+C</strong></td><td>laufendes Programm abbrechen</td><td>das rote X / Esc</td></tr><tr><td><strong>Strg+Z</strong></td><td>in den Hintergrund legen, <code>fg</code> bringt es zurück</td><td>*(existiert nicht)*</td></tr><tr><td><strong>Strg+L</strong></td><td>Bildschirm leeren</td><td>cls / clear</td></tr><tr><td><strong>Strg+Shift+C/V</strong></td><td>Kopieren/Einfügen IM TERMINAL (nicht Strg+C/V!)</td><td>—</td></tr><tr><td><strong>Strg+D</strong></td><td>Terminal schließen / Eingabe beenden</td><td>*(existiert nicht)*</td></tr><tr><td><strong>Strg+A / Strg+E</strong></td><td>Zeilenanfang/-ende springen</td><td>Home/Ende (fast)</td></tr><tr><td><strong>Strg+W</strong></td><td>Wort vor dem Cursor löschen</td><td>*(existiert nicht)*</td></tr></table>
+<h3>4.4 Pipes &amp; Redirects — die Superkraft</h3>
+<pre><code>ls -la | grep ".sh"        # filtern: nur .sh-Dateien zeigen (Pipe = Ausgabe an nächsten Befehl)
+df -h &gt; disk.txt           # Ausgabe in eine Datei speichern (Achtung: überschreibt die Datei!)
+echo "notiz" &gt;&gt; disk.txt   # anhängen (&gt;&gt;) — mit &gt; würde die Datei sonst geleert
+apt list --installed 2&gt;/dev/null | wc -l   # wie viele Programme sind installiert? (Zeilen zählen; 2&gt;/dev/null = Fehlermeldungen unterdrücken)
+sudo apt update &amp;&amp; sudo apt upgrade   # zweiter Befehl läuft nur, wenn der erste klappt (&amp;&amp;)
+ls; pwd                    # beide nacheinander, egal ob der erste klappt (;)</code></pre>
+<h3>4.5 Alltagsbefehle, die sich lohnen</h3>
+<pre><code>whoami           # Wer bin ich? (dein Benutzername)
+hostname         # Wie heißt der Rechner?
+uname -a         # Welches System/Kernel läuft?
+date             # Datum und Uhrzeit
+df -h            # Festplattenspeicher (human-readable)
+free -h          # RAM-Auslastung
+htop             # Task-Manager mit GUI (installieren: sudo apt install htop)
+ping google.com  # Funktioniert das Internet? (Strg+C zum Stoppen)
+curl -s https://example.com   # eine Webseite im Terminal abrufen
+ip a             # deine Netzwerk-Adressen (das „ipconfig“ von Windows)
+lsblk            # Platten &amp; Partitionen im Überblick (wie „Laufwerkverwaltung“)
+du -sh /home/deinname/*   # Größe der Ordner im Home (wer frisst den Speicher?)</code></pre>
+<hr>
+<h2 id="5-programme-installieren--entfernen">5. Programme installieren &amp; entfernen</h2>
+<p>Mint bietet drei Wege — fang mit der GUI an, wandere ins Terminal:</p>
+<p><strong>1. Software-Manager (GUI)</strong> — im Menü unter „Software“. Wie der Microsoft Store, nur für Linux. Zum Start völlig ausreichend.</p>
+<p><strong>2. apt (der System-Paketmanager)</strong> — der Standardweg:</p>
+<pre><code>sudo apt update                 # 1. IMMER zuerst! Paketlisten aktualisieren
+sudo apt install htop           # Programm installieren
+sudo apt remove htop            # deinstallieren (sauber — anders als Ordner löschen)
+sudo apt autoremove             # überflüssige Abhängigkeiten aufräumen (nach dem Entfernen)
+apt search firefox              # nach Programmen suchen
+apt show htop                   # Details zu einem Paket anzeigen
+sudo apt upgrade                # alle installierten Programme aktualisieren</code></pre>
+<p><strong>3. Flatpak (App-Store für neuere Apps)</strong> — eigenes Ökosystem, wie der Microsoft Store:</p>
+<pre><code>flatpak search gimp                          # suchen
+flatpak install flathub org.gimp.GIMP        # von Flathub installieren
+flatpak list                                 # installierte Flatpaks anzeigen
+flatpak uninstall org.gimp.GIMP              # wieder entfernen</code></pre>
+<p><strong>.deb-Dateien</strong> = das Linux-Pendant zu .exe-Installern. Doppelklick im Dateimanager, oder: <code>sudo dpkg -i datei.deb</code>. Meldet dabei eine fehlende Abhängigkeit, räumt <code>sudo apt --fix-broken install</code> auf.</p>
+<p><strong>Faustregel:</strong> System-Programme (htop, git, …) → <code>apt</code>. GUI-Apps, bei denen du die neueste Version willst (Discord, Spotify, VS Code, …) → Flatpak. Mint nutzt bewusst kein Snap — das ist in Ordnung, du brauchst es nicht.</p>
+<hr>
+<h2 id="6-benutzer-rechte--sudo">6. Benutzer, Rechte &amp; sudo</h2>
+<p><strong>Du bist nicht der Admin.</strong> Anders als unter Windows loggst du dich als normaler Benutzer ein. Für Admin-Aufgaben (Programme installieren, Systemeinstellungen ändern) setzt du <code>sudo</code> vor den Befehl:</p>
+<pre><code>sudo apt install htop    # „super user do“ = als Administrator ausführen</code></pre>
+<ul><li>Beim Passwort-Eingeben <strong>erscheint nichts auf dem Bildschirm</strong> — nicht mal Sternchen. Das ist normal, einfach tippen und Enter drücken.</li><li><code>sudo</code> gilt für ~15 Minuten, danach wird das Passwort erneut verlangt.</li><li><strong>„Permission denied“</strong> ist der häufigste Fehler → meistens heißt es: <code>sudo</code> davorsetzen.</li><li><strong>Nicht als root arbeiten</strong> (dafür gäbe es <code>sudo -i</code>, aber das ist für den Alltag zu gefährlich).</li><li><strong>chmod</strong>: Dateien ausführbar machen: <code>chmod +x mein-skript.sh</code></li></ul>
+<hr>
+<h2 id="7-windows--mint-umrechnungstabelle">7. Windows → Mint: Umrechnungstabelle</h2>
+<table><tr><th>In Windows</th><th>In Linux Mint</th></tr><tr><td>C:\Users\name</td><td>/home/name (<code>~</code>)</td></tr><tr><td>Program Files</td><td>/usr/bin (nicht anfassen)</td></tr><tr><td>Registry</td><td>Textdateien in <code>/etc</code> und <code>~/.config</code></td></tr><tr><td>Eingabeaufforderung (cmd)</td><td>Terminal (Strg+Alt+T, Bash)</td></tr><tr><td>PowerShell</td><td>Bash / Zsh</td></tr><tr><td>Explorer</td><td>Nemo (Dateimanager)</td></tr><tr><td>Notepad</td><td>Text-Editor (gedit)</td></tr><tr><td>Task-Manager</td><td>System-Monitor oder <code>htop</code></td></tr><tr><td>Systemsteuer</td><td>„System“ (Mint-Kontrollzentrum)</td></tr><tr><td>Papierkorb</td><td>Mülleimer (Rechtsklick → leeren)</td></tr><tr><td>Windows + R</td><td>kein direktes Äquivalent — das Terminal ist immer da</td></tr><tr><td>Rechtsklick → „Terminal hier öffnen“</td><td><strong>existiert!</strong> Rechtsklick auf Ordner in Nemo</td></tr><tr><td>Microsoft Store</td><td>Software-Manager / Flathub</td></tr><tr><td>Windows Update</td><td>Glocken-Symbol im Panel (Update-Applet) + <code>sudo apt upgrade</code></td></tr><tr><td>ipconfig</td><td><code>ip a</code> (oder kurz: <code>hostname -I</code>)</td></tr><tr><td>Task Planner</td><td>Cron (<code>crontab -e</code>) — siehe Kapitel 11</td></tr></table>
+<hr>
+<h2 id="8-die-ersten-10-dinge-nach-der-installation">8. Die ersten 10 Dinge nach der Installation</h2>
+<ol><li><strong>System aktualisieren</strong>: <code>sudo apt update &amp;&amp; sudo apt upgrade</code> (macht auch die Glocke im Panel)</li><li><strong>Timeshift einrichten</strong> — Mints System-Snapshots, wie Windows-Wiederherstellungspunkte: *System → Timeshift* → tägliche/wöchentliche Snapshots planen. Wenn später etwas kaputt ist, rollst du das ganze System in 5 Minuten zurück. <strong>Das zuerst machen!</strong></li><li><strong>/home sichern</strong> — Timeshift schützt das System, aber deine Daten (Dokumente, Bilder) sicherst du separat (externe Festplatte, Cloud).</li><li><strong>htop installieren</strong>: <code>sudo apt install htop</code> — ein schöner Task-Manager fürs Terminal</li><li><strong>Platz prüfen</strong>: <code>df -h</code> — verschaffe dir ein Bild, wie deine Platten aufgeteilt sind</li><li><strong>Benötigte Tools installieren</strong> (Browser, Office — LibreOffice ist schon dabei)</li><li><strong>Treiber checken</strong>: *System → Treiber-Manager* (WLAN, Grafik — funktioniert meist out of the box)</li><li><strong>Git-User anlegen</strong> (falls du codest): <code>git config --global user.name "..."</code> + E-Mail</li><li><strong>Täglich 5 Befehle lernen</strong> — siehe Lernplan in Kapitel 13</li><li><strong>Genießen.</strong> Die ersten Tage sind Gewöhnung an neue Muskelgedächtnis-Routinen, nicht Lernen von allem.</li></ol>
+<hr>
+<h2 id="9-häufige-stolperfallen">9. Häufige Stolperfallen</h2>
+<ol><li><strong>Groß-/Kleinschreibung</strong> — <code>ls DATEI.TXT</code> findet nichts, weil die Datei <code>datei.txt</code> heißt. Linux unterscheidet in Pfaden, Dateinamen und Befehlen.</li><li><strong>Kein Papierkorb im Terminal</strong> — <code>rm</code> löscht endgültig. Im Dateimanager (Nemo) gibt es den Mülleimer. Regel: Im Terminal vor dem <code>rm</code> nachdenken. Wer es sicherer mag: <code>sudo apt install trash-cli</code> — dann räumt <code>trash datei.txt</code> in den Mülleimer statt endgültig zu löschen.</li><li><strong>Passwort wird nicht angezeigt</strong> — wenn sudo nach dem Passwort fragt, bleibt der Bildschirm leer. Das ist normal (Sicherheitsfeature), kein Bug.</li><li><strong>„Permission denied“</strong> — du brauchst <code>sudo</code> vor dem Befehl. Aber: nicht bei allem sudo, nur wo nötig.</li><li><strong>Kein C:\-Laufwerk</strong> — es gibt keine Laufwerke, alles liegt unter <code>/</code>. Wenn ein Programm „C:\“ sagt, ist es wahrscheinlich ein Windows-Programm, das Linux nicht ganz versteht.</li><li><strong>Deinstallieren per Ordner löschen</strong> — funktioniert nicht (und ist gefährlich). <code>sudo apt remove</code> oder Software-Manager nutzen.</li><li><strong>Virenscanner</strong> — unter Linux meist unnötig. Das Viren-Ökosystem ist anders; 99 % der Malware zielt auf Windows. (Falls doch: ClamAV existiert, wird aber selten gebraucht.)</li><li><strong>Spiele</strong> — gute Nachricht: Steam läuft hervorragend unter Linux (Proton spielt die meisten Windows-Spiele). Kompatibilität checken auf <a href="https://www.protondb.com">protondb.com</a></li><li><strong>Terminal „macht nichts“</strong> — wenn ein Befehl keine Ausgabe produziert, hat er meistens funktioniert (z. B. <code>mkdir</code>). Mit <code>ls</code> prüfen.</li><li><strong>Nicht dagegen ankämpfen</strong> — wenn etwas nicht geht: „linux mint“ + Problem googeln. 90 % aller Probleme hat schon jemand gelöst.</li><li><strong>GUI einfriert</strong> — <code>Strg+Alt+F2</code> öffnet eine Text-Konsole (dort einloggen, Problem lösen oder sauber neu starten). Zurück zur grafischen Oberfläche: <code>Strg+Alt+F7</code>.</li></ol>
+<hr>
+<h2 id="10-text-suchen-grep--find">10. Text suchen: grep &amp; find</h2>
+<p>Die zwei wichtigsten Suchbefehle — einmal gelernt, täglich im Einsatz:</p>
+<pre><code># grep = Text IN Dateien/Zeilen suchen
+grep "fehler" datei.txt               # alle Zeilen mit „fehler“ anzeigen
+ls -la | grep ".sh"                   # Liste filtern (mit Pipe kombinieren)
+grep -r "text" /home/deinname/proj/   # rekursiv in ALLEN Dateien eines Ordners suchen
+grep -i "fehler" datei.txt            # Groß-/Kleinschreibung ignorieren
+
+# find = Dateien NACH NAMEN suchen
+find /home/deinname -name "*.pdf"     # alle PDFs im Home-Verzeichnis
+find /home/deinname -iname "*.PDF"    # wie -name, aber ohne Groß-/Kleinschreibung
+find /home/deinname -name "bericht*"  # Dateien, die mit „bericht“ beginnen
+
+# head/tail = Datei-Anfang/-Ende ansehen, ohne sie zu öffnen
+head datei.txt                        # die ersten 10 Zeilen
+tail -n 20 /var/log/syslog            # die letzten 20 Zeilen eines Protokolls</code></pre>
+<hr>
+<h2 id="11-dein-erstes-skript">11. Dein erstes Skript</h2>
+<p>Der Killer-Feature von Linux: Alles, was du im Terminal machst, lässt sich automatisieren. Dein erstes Skript dauert 2 Minuten:</p>
+<pre><code>nano hello.sh          # Editor öffnen (oder deinen Favoriten)</code></pre>
+<p>Rein tippen:</p>
+<pre><code>#!/bin/bash
+echo "Hallo! Mein erstes Skript läuft."
+date                   # zeigt auch das aktuelle Datum</code></pre>
+<p>Speichern (in nano: <strong>Strg+O</strong>, Enter, <strong>Strg+X</strong>), dann:</p>
+<pre><code>chmod +x hello.sh      # ausführbar machen
+./hello.sh             # ausführen!</code></pre>
+<p><strong>Aliases</strong> — deine eigenen Abkürzungen. In <code>~/.bashrc</code> (mit nano öffnen) anhängen:</p>
+<pre><code>alias ll='ls -la'                          # ll = alles mit Details auflisten
+alias ..='cd ..'                          # .. = eine Ebene hoch
+alias proj='cd /home/deinname/projekte'   # direkt ins Projekt-Verzeichnis springen</code></pre>
+<p>Dann <code>source ~/.bashrc</code> (oder neues Terminal öffnen) — fertig, für immer.</p>
+<p><strong>Cron</strong> = der Task-Planner (wie Windows Task Scheduler):</p>
+<pre><code>crontab -e             # deinen Zeitplan öffnen (leer, wenn noch keiner da ist)
+# Beispiel: täglich um 3 Uhr morgens sichern:
+0 3 * * * rsync -a /home/deinname/dokumente /backup/</code></pre>
+<p>*(Falls statt nano plötzlich <code>vi</code> öffnet — schwarzer Bildschirm, seltsame Tasten: <code>:q!</code> tippen und Enter drücken, um zu entkommen. Damit immer nano kommt: <code>export EDITOR=nano</code> in <code>~/.bashrc</code> anhängen.)*</p>
+<hr>
+<h2 id="12-wo-du-hilfe-findest">12. Wo du Hilfe findest</h2>
+<ul><li><strong><code>man befehl</code></strong> — das Handbuch zu JEDEM Befehl (z. B. <code>man grep</code>). q = zurück. Sieht am Anfang abschreckend aus, ist aber die komplette Doku.</li><li><strong><code>man -k text</code></strong> — du weißt den Befehlsnamen nicht? Sucht in allen Handbuch-Titeln (z. B. <code>man -k pdf</code>).</li><li><strong><code>befehl --help</code></strong> — kurze Hilfe (z. B. <code>grep --help</code>)</li><li><strong><code>tldr</code></strong> — wenn man-Seiten zu trocken sind: <code>sudo apt install tldr</code>, dann z. B. <code>tldr grep</code> — kurze Praxisbeispiele statt Voll-Doku.</li><li><strong>Wenn was kaputt ist und du nicht weißt, wo du suchen sollst:</strong> <code>journalctl -n 50 --no-pager</code> zeigt die letzten 50 System-Protokolle.</li><li><strong>Google</strong> — immer mit „linux mint“ + Version suchen (z. B. „linux mint 22“). Lösungen älterer Versionen passen oft, aber die Version zählt!</li><li><strong>Mint-Forum</strong> (forum.mint.com) — sehr freundlich, schnelle Antworten</li><li><strong>Ask Ubuntu</strong> (askubuntu.com) — die große Q&amp;A-Plattform für Linux</li><li><strong>Reddit</strong>: r/linux, r/MintOS — gut für „ist das normal?“-Fragen</li><li><strong>Wenn du Hilfe suchst, immer nennen</strong>: Mint-Version (<code>lsb_release -a</code>), die exakte Fehlermeldung (kopieren!) und was du schon probiert hast.</li></ul>
+<hr>
+<h2 id="13-lernplan-für-die-erste-woche">13. Lernplan für die erste Woche</h2>
+<p>Nicht alles auf einmal lernen. Das funktioniert:</p>
+<table><tr><th>Tag</th><th>Fokus</th></tr><tr><td>1</td><td>Einfach nutzen. GUI gewöhnen, Timeshift-Snapshot anlegen (Kapitel 8)</td></tr><tr><td>2</td><td>Terminal-Basics: pwd, ls, cd + <strong>Tab-Vervollständigung</strong> (bis es zum Reflex wird)</td></tr><tr><td>3</td><td>Dateien: cp, mv, rm + sudo (und das Passwort-ohne-Anzeige-Ding)</td></tr><tr><td>4</td><td>apt: update, install, remove — drei Programme installieren, die du wirklich brauchst</td></tr><tr><td>5</td><td>grep + Pipes: Text finden, Listen filtern</td></tr><tr><td>6</td><td>htop, df, free — das System „fühlen“ lernen</td></tr><tr><td>7</td><td>Erstes Skript + zwei Aliase (Kapitel 11)</td></tr></table>
+<p><strong>Ab Woche 2:</strong> find, mehr Skripte, Cron-Jobs, vielleicht deine erste eigene Automatisierung. Das Terminal wird zum Reflex — und dann fragst du dich, wie du je ohne ausgekommen bist.</p>
+<hr>
+<h2 id="14-taschenkarte-die-wichtigsten-befehle">14. Taschenkarte: Die wichtigsten Befehle</h2>
+<p>*Zum Ausdrucken und an die Wand hängen:*</p>
+<pre><code>ORIENTIEREN          DATEIEN              SYSTEM
+pwd                  mkdir ordner         whoami
+ls -la               cp a b/              df -h        (Platte)
+cd /pfad             mv a b               free -h      (RAM)
+cd ..                rm datei             htop         (Prozesse)
+cd -                 rm -r ordner/        uname -a     (Kernel)
+                     cat datei            ip a         (Netzwerk)
+                     du -sh ordner/       lsblk        (Laufwerke)
+
+PROGRAMME            SUCHEN               TASTEN
+sudo apt update      grep "text" datei    Tab        Vervollständigen
+sudo apt install x   grep -r "t" ordner/  Strg+R     Historie suchen
+sudo apt remove x    find . -name "*.pdf" Strg+C     abbrechen
+apt search x         man befehl           Strg+L     leeren
+flatpak install …    befehl --help        Strg+Shift+C/V  kopieren/einfügen
+
+REGELN:
+• Groß-/Kleinschreibung zählt (Datei ≠ datei)
+• rm im Terminal = endgültig gelöscht
+• „Permission denied“ → sudo davor
+• Passwort im Terminal wird nicht angezeigt — normal!
+• Im Zweifel: ls tippen und umsehen. Man kaputt macht man fast nichts —
+  außer mit „sudo rm -rf“ ohne Nachdenken.</code></pre>
+<hr>
+<p><strong>Wichtigste Pfade auf einen Blick:</strong></p>
+<pre><code>~/.bashrc        ← deine Terminal-Einstellungen (Aliases, Farben)
+~/.config/       ← App-Einstellungen (versteckte Ordner mit Punkt)
+/etc/            ← systemweite Einstellungen
+/var/log/        ← Protokolle (wenn was kaputt ist: hier nachschauen)
+/tmp/            ← temporäre Dateien (beim Neustart geleert)</code></pre>
+<p><strong>Letzter Tipp:</strong> Wenn du unsicher bist, tippe <code>ls</code> und sieh dich um. Unter Linux kann man fast alles erkunden, ohne etwas kaputt zu machen — solange man nicht mit <code>sudo rm -rf</code> um sich wirft. (Und selbst das: nie mit trailing <code>/</code> und ohne Nachdenken.)</p>
+<p>Viel Erfolg — und willkommen in der freien Welt! 🐧</p>
+<footer>Gemacht mit ❤️ und <code>apt install</code> · Viel Erfolg — und willkommen in der freien Welt! 🐧</footer>
+</body>
+</html>
