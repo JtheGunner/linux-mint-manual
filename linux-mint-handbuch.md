@@ -389,7 +389,7 @@ Das Panel (deine Taskleiste) ist frei konfigurierbar:
 
 ### 14.3 Desklets — Widgets auf dem Desktop
 
-Du hast htop gesehen und jemand erzählt dir, dass ein Freund so etwas permanent — aber hübscher — auf dem Desktop abbildet? Das ist der Klassiker. Die native Lösung:
+Du willst System-Infos wie htop permanent auf dem Desktop abbilden — aber hübscher? Das ist ein Klassiker unter Linux-Nutzern. Die native Lösung:
 
 - **Rechtsklick auf den Desktop → „Zum Desktop hinzufügen“** — dort gibt es u. a. einen **System-Monitor-Desklet**: CPU, RAM, Festplatte und Netzwerk als kleine Graphen direkt auf dem Desktop.
 - Per Rechtsklick auf den Desklet verschiebbar und konfigurierbar (was angezeigt wird, Farben).
