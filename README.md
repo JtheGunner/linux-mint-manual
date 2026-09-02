@@ -25,13 +25,13 @@ Der Konverter erwartet ein Markdown-Subset (Headings, Codeblöcke, Tabellen,
 Listen, Bold/Inline-Code/Links) und prüft beim Generieren automatisch, ob alle
 Inhaltsverzeichnis-Anker auflösen.
 
-## Inhalt in 14 Kapiteln
+## Inhalt in 15 Kapiteln
 
 Mentaler Umstieg · Dateisystem · Terminal (inkl. Pipes & Tastenkürzel) ·
 Programme installieren · sudo & Rechte · Windows→Mint-Tabelle ·
 Die ersten 10 Dinge nach der Installation · Häufige Stolperfallen ·
 grep & find · Dein erstes Skript (Aliase, Cron) · Wo du Hilfe findest ·
-Lernplan für die erste Woche · Taschenkarte
+Design & Style (Themes, Applets, Desklets, Conky) · Lernplan für die erste Woche · Taschenkarte
 
 ---
 

@@ -20,7 +20,8 @@ Für alle, die technisch affin sind, aber noch nie mit Unix zu tun hatten.
 11. [Dein erstes Skript](#11-dein-erstes-skript)
 12. [Wo du Hilfe findest](#12-wo-du-hilfe-findest)
 13. [Lernplan für die erste Woche](#13-lernplan-für-die-erste-woche)
-14. [Taschenkarte: Die wichtigsten Befehle](#14-taschenkarte-die-wichtigsten-befehle)
+14. [Design & Style — Mach Mint zu deinem](#14-design--style--mach-mint-zu-deinem)
+15. [Taschenkarte: Die wichtigsten Befehle](#15-taschenkarte-die-wichtigsten-befehle)
 
 ---
 
@@ -357,11 +358,74 @@ Nicht alles auf einmal lernen. Das funktioniert:
 | 6 | htop, df, free — das System „fühlen“ lernen |
 | 7 | Erstes Skript + zwei Aliase (Kapitel 11) |
 
-**Ab Woche 2:** find, mehr Skripte, Cron-Jobs, vielleicht deine erste eigene Automatisierung. Das Terminal wird zum Reflex — und dann fragst du dich, wie du je ohne ausgekommen bist.
+**Ab Woche 2:** find, mehr Skripte, Cron-Jobs, vielleicht deine erste eigene Automatisierung — und Design-Experimente (Kapitel 14): ein neues Theme, ein Desklet auf dem Desktop, vielleicht Conky. Das Terminal wird zum Reflex — und dann fragst du dich, wie du je ohne ausgekommen bist.
 
 ---
 
-## 14. Taschenkarte: Die wichtigsten Befehle
+## 14. Design & Style — Mach Mint zu deinem
+
+Linux lässt sich komplett anpassen — von der Fenstergestaltung bis hin zu Widgets auf dem Desktop. Und das Schöne: Fast alles geht per GUI, ohne eine Zeile Konfiguration zu schreiben.
+
+**Das zentrale Steuerzentrum:** *System → Einstellungen* (oder `cinnamon-settings` im Terminal). Dort findest du Themes, Applets, Desklets, Schriften und Hintergründe an einem Ort.
+
+### 14.1 Themes, Icons & Co.
+
+*System → Einstellungen → Erscheinungsbild*:
+
+- **Fenstergestaltung** — Fenster, Menüs und Dialoge (Mint-Y, Adwaita, …). Viele Themes haben eine **dunkle Variante** — per Schalter umschaltbar.
+- **Icons & Cursor** — eigene Icon-Sets und Cursor-Themes auswählen oder installieren.
+- **Schriften** — Systemschrift, Dokumentenschrift und Monospace-Schrift wählen.
+- **Hintergrund** — Wallpaper pro Monitor setzen. Oder einfacher: Rechtsklick auf den Desktop → „Ändern der Desktop-Hintergrund“.
+
+**Mehr Themes:** Die App **Mint Themes** (im Menü) durchsucht [themes.mint.com](https://themes.mint.com) — dort gibt es dutzende Community-Designs, per Klick installierbar.
+
+### 14.2 Panel & Applets
+
+Das Panel (deine Taskleiste) ist frei konfigurierbar:
+
+- **Rechtsklick ins Panel → „Applets“** — Applets hinzufügen, entfernen, umsortieren (Uhr, System-Monitor, …).
+- **Rechtsklick → „Panel bearbeiten“** — Position (oben/unten/links/rechts), Höhe, Verhalten.
+- **Noch mehr Applets:** *Cinnamon-Einstellungen → Applets → „Installieren“* — öffnet den Spice-Store ([cinnamon-spices.linuxmint.com](https://cinnamon-spices.linuxmint.com)) mit hunderten Community-Applets.
+
+### 14.3 Desklets — Widgets auf dem Desktop
+
+Du hast htop gesehen und jemand erzählt dir, dass ein Freund so etwas permanent — aber hübscher — auf dem Desktop abbildet? Das ist der Klassiker. Die native Lösung:
+
+- **Rechtsklick auf den Desktop → „Zum Desktop hinzufügen“** — dort gibt es u. a. einen **System-Monitor-Desklet**: CPU, RAM, Festplatte und Netzwerk als kleine Graphen direkt auf dem Desktop.
+- Per Rechtsklick auf den Desklet verschiebbar und konfigurierbar (was angezeigt wird, Farben).
+- Weitere Desklets (Uhr, Kalender, Notizen …) über *Cinnamon-Einstellungen → Desklets → „Installieren“*.
+
+### 14.4 Conky — die hübschere Variante
+
+Wenn dir der Desklet nicht „modern“ genug ist: **Conky** ist ein extrem anpassbares Desktop-Widget (Konfiguration in Lua). Damit entstehen die schicken, minimalistischen System-Dashboards, die man auf Linux-Desktops sieht. (Mints Cinnamon läuft standardmäßig unter X11 — genau das, was Conky braucht.)
+
+```bash
+sudo apt install conky            # installieren
+conky                            # einmal testweise starten (Strg+C beendet)
+```
+
+- **Fertige Designs:** [conky.cc](https://conky.cc/) ist die offizielle Doku (inkl. Tutorial); für fertige Konfigurationen z. B. [zagortenay333/conky_themes](https://github.com/zagortenay333/conky_themes) auf GitHub.
+- **Übernehmen:** Konfigurationsdatei als `~/.config/conky/conky.conf` speichern, dann einfach `conky` ausführen.
+- **Automatisch starten:** *System → Einstellungen → Autostart* → hinzufügen, Befehl: `conky`.
+- **Anpassen:** Farben, Schriften und angezeigte Werte stehen oben in der Konfigurationsdatei — zum Starten genügt es, eine Vorlage zu nehmen und nur Farben/Schriften zu ändern.
+
+### 14.5 Schriften & Terminal-Farben
+
+**Eigene Schriften installieren:**
+
+```bash
+mkdir -p ~/.local/share/fonts     # Ordner anlegen (falls nicht vorhanden)
+# .ttf/.otf-Dateien dorthin kopieren (z. B. per Drag & Drop in Nemo)
+fc-cache -f ~/.local/share/fonts  # für das System registrieren
+```
+
+Danach stehen sie in *Erscheinungsbild → Schriften* und in allen Programmen zur Verfügung.
+
+**Terminal-Farben:** *Terminal → Einstellungen* — beim Profil unter „Farben“ gibt es fertige Paletten (oder eigene). Ein modernes Farbschema macht htop & Co. sofort deutlich angenehmer.
+
+---
+
+## 15. Taschenkarte: Die wichtigsten Befehle
 
 *Zum Ausdrucken und an die Wand hängen:*
 

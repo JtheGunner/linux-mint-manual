@@ -45,7 +45,7 @@ footer { margin-top:3em; padding-top:14px; border-top:2px solid #e6ebe0; color:v
   <p class="meta">Für alle, die technisch affin sind, aber noch nie mit Unix zu tun hatten · Stand: September 2026</p>
 </header>
 <h2 id="inhaltsverzeichnis">Inhaltsverzeichnis</h2>
-<ol><li><a href="#1-der-mentale-umstieg">Der mentale Umstieg</a></li><li><a href="#2-so-funktioniert-linux-in-60-sekunden">So funktioniert Linux (in 60 Sekunden)</a></li><li><a href="#3-das-dateisystem-verstehen">Das Dateisystem verstehen</a></li><li><a href="#4-das-terminal--dein-neues-werkzeug">Das Terminal — dein neues Werkzeug</a></li><li><a href="#5-programme-installieren--entfernen">Programme installieren &amp; entfernen</a></li><li><a href="#6-benutzer-rechte--sudo">Benutzer, Rechte &amp; sudo</a></li><li><a href="#7-windows--mint-umrechnungstabelle">Windows → Mint: Umrechnungstabelle</a></li><li><a href="#8-die-ersten-10-dinge-nach-der-installation">Die ersten 10 Dinge nach der Installation</a></li><li><a href="#9-häufige-stolperfallen">Häufige Stolperfallen</a></li><li><a href="#10-text-suchen-grep--find">Text suchen: grep &amp; find</a></li><li><a href="#11-dein-erstes-skript">Dein erstes Skript</a></li><li><a href="#12-wo-du-hilfe-findest">Wo du Hilfe findest</a></li><li><a href="#13-lernplan-für-die-erste-woche">Lernplan für die erste Woche</a></li><li><a href="#14-taschenkarte-die-wichtigsten-befehle">Taschenkarte: Die wichtigsten Befehle</a></li></ol>
+<ol><li><a href="#1-der-mentale-umstieg">Der mentale Umstieg</a></li><li><a href="#2-so-funktioniert-linux-in-60-sekunden">So funktioniert Linux (in 60 Sekunden)</a></li><li><a href="#3-das-dateisystem-verstehen">Das Dateisystem verstehen</a></li><li><a href="#4-das-terminal--dein-neues-werkzeug">Das Terminal — dein neues Werkzeug</a></li><li><a href="#5-programme-installieren--entfernen">Programme installieren &amp; entfernen</a></li><li><a href="#6-benutzer-rechte--sudo">Benutzer, Rechte &amp; sudo</a></li><li><a href="#7-windows--mint-umrechnungstabelle">Windows → Mint: Umrechnungstabelle</a></li><li><a href="#8-die-ersten-10-dinge-nach-der-installation">Die ersten 10 Dinge nach der Installation</a></li><li><a href="#9-häufige-stolperfallen">Häufige Stolperfallen</a></li><li><a href="#10-text-suchen-grep--find">Text suchen: grep &amp; find</a></li><li><a href="#11-dein-erstes-skript">Dein erstes Skript</a></li><li><a href="#12-wo-du-hilfe-findest">Wo du Hilfe findest</a></li><li><a href="#13-lernplan-für-die-erste-woche">Lernplan für die erste Woche</a></li><li><a href="#14-design--style--mach-mint-zu-deinem">Design &amp; Style — Mach Mint zu deinem</a></li><li><a href="#15-taschenkarte-die-wichtigsten-befehle">Taschenkarte: Die wichtigsten Befehle</a></li></ol>
 <hr>
 <h2 id="1-der-mentale-umstieg">1. Der mentale Umstieg</h2>
 <p>Windows und Linux denken grundlegend anders:</p>
@@ -192,9 +192,35 @@ alias proj='cd /home/deinname/projekte'   # direkt ins Projekt-Verzeichnis sprin
 <h2 id="13-lernplan-für-die-erste-woche">13. Lernplan für die erste Woche</h2>
 <p>Nicht alles auf einmal lernen. Das funktioniert:</p>
 <table><tr><th>Tag</th><th>Fokus</th></tr><tr><td>1</td><td>Einfach nutzen. GUI gewöhnen, Timeshift-Snapshot anlegen (Kapitel 8)</td></tr><tr><td>2</td><td>Terminal-Basics: pwd, ls, cd + <strong>Tab-Vervollständigung</strong> (bis es zum Reflex wird)</td></tr><tr><td>3</td><td>Dateien: cp, mv, rm + sudo (und das Passwort-ohne-Anzeige-Ding)</td></tr><tr><td>4</td><td>apt: update, install, remove — drei Programme installieren, die du wirklich brauchst</td></tr><tr><td>5</td><td>grep + Pipes: Text finden, Listen filtern</td></tr><tr><td>6</td><td>htop, df, free — das System „fühlen“ lernen</td></tr><tr><td>7</td><td>Erstes Skript + zwei Aliase (Kapitel 11)</td></tr></table>
-<p><strong>Ab Woche 2:</strong> find, mehr Skripte, Cron-Jobs, vielleicht deine erste eigene Automatisierung. Das Terminal wird zum Reflex — und dann fragst du dich, wie du je ohne ausgekommen bist.</p>
+<p><strong>Ab Woche 2:</strong> find, mehr Skripte, Cron-Jobs, vielleicht deine erste eigene Automatisierung — und Design-Experimente (Kapitel 14): ein neues Theme, ein Desklet auf dem Desktop, vielleicht Conky. Das Terminal wird zum Reflex — und dann fragst du dich, wie du je ohne ausgekommen bist.</p>
 <hr>
-<h2 id="14-taschenkarte-die-wichtigsten-befehle">14. Taschenkarte: Die wichtigsten Befehle</h2>
+<h2 id="14-design--style--mach-mint-zu-deinem">14. Design &amp; Style — Mach Mint zu deinem</h2>
+<p>Linux lässt sich komplett anpassen — von der Fenstergestaltung bis hin zu Widgets auf dem Desktop. Und das Schöne: Fast alles geht per GUI, ohne eine Zeile Konfiguration zu schreiben.</p>
+<p><strong>Das zentrale Steuerzentrum:</strong> *System → Einstellungen* (oder <code>cinnamon-settings</code> im Terminal). Dort findest du Themes, Applets, Desklets, Schriften und Hintergründe an einem Ort.</p>
+<h3>14.1 Themes, Icons &amp; Co.</h3>
+<p>*System → Einstellungen → Erscheinungsbild*:</p>
+<ul><li><strong>Fenstergestaltung</strong> — Fenster, Menüs und Dialoge (Mint-Y, Adwaita, …). Viele Themes haben eine <strong>dunkle Variante</strong> — per Schalter umschaltbar.</li><li><strong>Icons &amp; Cursor</strong> — eigene Icon-Sets und Cursor-Themes auswählen oder installieren.</li><li><strong>Schriften</strong> — Systemschrift, Dokumentenschrift und Monospace-Schrift wählen.</li><li><strong>Hintergrund</strong> — Wallpaper pro Monitor setzen. Oder einfacher: Rechtsklick auf den Desktop → „Ändern der Desktop-Hintergrund“.</li></ul>
+<p><strong>Mehr Themes:</strong> Die App <strong>Mint Themes</strong> (im Menü) durchsucht <a href="https://themes.mint.com">themes.mint.com</a> — dort gibt es dutzende Community-Designs, per Klick installierbar.</p>
+<h3>14.2 Panel &amp; Applets</h3>
+<p>Das Panel (deine Taskleiste) ist frei konfigurierbar:</p>
+<ul><li><strong>Rechtsklick ins Panel → „Applets“</strong> — Applets hinzufügen, entfernen, umsortieren (Uhr, System-Monitor, …).</li><li><strong>Rechtsklick → „Panel bearbeiten“</strong> — Position (oben/unten/links/rechts), Höhe, Verhalten.</li><li><strong>Noch mehr Applets:</strong> *Cinnamon-Einstellungen → Applets → „Installieren“* — öffnet den Spice-Store (<a href="https://cinnamon-spices.linuxmint.com">cinnamon-spices.linuxmint.com</a>) mit hunderten Community-Applets.</li></ul>
+<h3>14.3 Desklets — Widgets auf dem Desktop</h3>
+<p>Du hast htop gesehen und jemand erzählt dir, dass ein Freund so etwas permanent — aber hübscher — auf dem Desktop abbildet? Das ist der Klassiker. Die native Lösung:</p>
+<ul><li><strong>Rechtsklick auf den Desktop → „Zum Desktop hinzufügen“</strong> — dort gibt es u. a. einen <strong>System-Monitor-Desklet</strong>: CPU, RAM, Festplatte und Netzwerk als kleine Graphen direkt auf dem Desktop.</li><li>Per Rechtsklick auf den Desklet verschiebbar und konfigurierbar (was angezeigt wird, Farben).</li><li>Weitere Desklets (Uhr, Kalender, Notizen …) über *Cinnamon-Einstellungen → Desklets → „Installieren“*.</li></ul>
+<h3>14.4 Conky — die hübschere Variante</h3>
+<p>Wenn dir der Desklet nicht „modern“ genug ist: <strong>Conky</strong> ist ein extrem anpassbares Desktop-Widget (Konfiguration in Lua). Damit entstehen die schicken, minimalistischen System-Dashboards, die man auf Linux-Desktops sieht. (Mints Cinnamon läuft standardmäßig unter X11 — genau das, was Conky braucht.)</p>
+<pre><code>sudo apt install conky            # installieren
+conky                            # einmal testweise starten (Strg+C beendet)</code></pre>
+<ul><li><strong>Fertige Designs:</strong> <a href="https://conky.cc/">conky.cc</a> ist die offizielle Doku (inkl. Tutorial); für fertige Konfigurationen z. B. <a href="https://github.com/zagortenay333/conky_themes">zagortenay333/conky_themes</a> auf GitHub.</li><li><strong>Übernehmen:</strong> Konfigurationsdatei als <code>~/.config/conky/conky.conf</code> speichern, dann einfach <code>conky</code> ausführen.</li><li><strong>Automatisch starten:</strong> *System → Einstellungen → Autostart* → hinzufügen, Befehl: <code>conky</code>.</li><li><strong>Anpassen:</strong> Farben, Schriften und angezeigte Werte stehen oben in der Konfigurationsdatei — zum Starten genügt es, eine Vorlage zu nehmen und nur Farben/Schriften zu ändern.</li></ul>
+<h3>14.5 Schriften &amp; Terminal-Farben</h3>
+<p><strong>Eigene Schriften installieren:</strong></p>
+<pre><code>mkdir -p ~/.local/share/fonts     # Ordner anlegen (falls nicht vorhanden)
+# .ttf/.otf-Dateien dorthin kopieren (z. B. per Drag &amp; Drop in Nemo)
+fc-cache -f ~/.local/share/fonts  # für das System registrieren</code></pre>
+<p>Danach stehen sie in *Erscheinungsbild → Schriften* und in allen Programmen zur Verfügung.</p>
+<p><strong>Terminal-Farben:</strong> *Terminal → Einstellungen* — beim Profil unter „Farben“ gibt es fertige Paletten (oder eigene). Ein modernes Farbschema macht htop &amp; Co. sofort deutlich angenehmer.</p>
+<hr>
+<h2 id="15-taschenkarte-die-wichtigsten-befehle">15. Taschenkarte: Die wichtigsten Befehle</h2>
 <p>*Zum Ausdrucken und an die Wand hängen:*</p>
 <pre><code>ORIENTIEREN          DATEIEN              SYSTEM
 pwd                  mkdir ordner         whoami
