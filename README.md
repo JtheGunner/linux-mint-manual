@@ -36,25 +36,25 @@ Taschenkarte mit den wichtigsten Befehlen zum Ausdrucken.
 
 ## 📚 Inhalt
 
-|    | Bereich | Kapitel |
-|:--:|---------|---------|
-| 🧠 | **Grundlagen** | 1 Der mentale Umstieg · 2 So funktioniert Linux · 3 Das Dateisystem · 4 Das Terminal (Tastenkürzel, Pipes, Alltagsbefehle) |
-| 📦 | **Software & System** | 5 Programme installieren (apt, Flatpak, .deb) · 6 Software-Einkaufsliste · 7 Benutzer, Rechte & sudo · 8 Dienste mit systemctl |
-| 🔄 | **Umstieg** | 9 Windows → Mint-Umrechnungstabelle · 10 Die ersten 10 Dinge nach der Installation · 11 Häufige Stolperfallen |
-| 🛠️ | **Werkzeuge** | 12 grep & find · 13 Archive (.zip, .tar.gz) · 14 Dein erstes Skript (Aliase, Cron) |
-| 🆘 | **Hilfe** | 15 Wo du Hilfe findest · 16 Erste Hilfe, wenn was kaputt geht |
-| 🌱 | **Weiterkommen** | 17 Lernplan für die erste Woche · 18 Design & Style (Themes, Applets, Desklets, Conky) · 19 Terminal-Spaß · 20 Dein wöchentliches Ritual |
-| 🗂️ | **Zum Nachschlagen** | 21 Taschenkarte · Anhang: Ausblick („Wenn du bereit bist“) und Glossar |
+|    | Bereich               | Kapitel                                                                                                                                  |
+|:--:|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 🧠 | **Grundlagen**        | 1 Der mentale Umstieg · 2 So funktioniert Linux · 3 Das Dateisystem · 4 Das Terminal (Tastenkürzel, Pipes, Alltagsbefehle)               |
+| 📦 | **Software & System** | 5 Programme installieren (apt, Flatpak, .deb) · 6 Software-Einkaufsliste · 7 Benutzer, Rechte & sudo · 8 Dienste mit systemctl           |
+| 🔄 | **Umstieg**           | 9 Windows → Mint-Umrechnungstabelle · 10 Die ersten 10 Dinge nach der Installation · 11 Häufige Stolperfallen                            |
+| 🛠️ | **Werkzeuge**         | 12 grep & find · 13 Archive (.zip, .tar.gz) · 14 Dein erstes Skript (Aliase, Cron)                                                       |
+| 🆘 | **Hilfe**             | 15 Wo du Hilfe findest · 16 Erste Hilfe, wenn was kaputt geht                                                                            |
+| 🌱 | **Weiterkommen**      | 17 Lernplan für die erste Woche · 18 Design & Style (Themes, Applets, Desklets, Conky) · 19 Terminal-Spaß · 20 Dein wöchentliches Ritual |
+| 🗂️ | **Zum Nachschlagen**  | 21 Taschenkarte · Anhang: Ausblick („Wenn du bereit bist“) und Glossar                                                                   |
 
 ---
 
 ## 📁 Dateien
 
-|    | Datei | Was ist das? |
-|:--:|-------|--------------|
-| 📝 | [`linux-mint-handbuch.md`](linux-mint-handbuch.md) | Das Handbuch — die Quelle, hier wird bearbeitet |
+|    | Datei                                                  | Was ist das?                                                          |
+|:--:|--------------------------------------------------------|-----------------------------------------------------------------------|
+| 📝 | [`linux-mint-handbuch.md`](linux-mint-handbuch.md)     | Das Handbuch — die Quelle, hier wird bearbeitet                       |
 | 🌐 | [`linux-mint-handbuch.html`](linux-mint-handbuch.html) | Gestyltes HTML zum Lesen & Drucken (generiert, nicht von Hand ändern) |
-| ⚙️ | [`md2html.mjs`](md2html.mjs) | Kleiner Node-Konverter: Markdown → HTML, ohne Abhängigkeiten |
+| ⚙️ | [`md2html.mjs`](md2html.mjs)                           | Kleiner Node-Konverter: Markdown → HTML, ohne Abhängigkeiten          |
 
 ---
 
