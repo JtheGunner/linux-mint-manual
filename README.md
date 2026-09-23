@@ -33,6 +33,12 @@ Die ersten 10 Dinge nach der Installation · Häufige Stolperfallen ·
 grep & find · Dein erstes Skript (Aliase, Cron) · Wo du Hilfe findest ·
 Design & Style (Themes, Applets, Desklets, Conky) · Lernplan für die erste Woche · Taschenkarte
 
----
+## Mitwirken
 
-Frei verwendbar: Kopieren, anpassen, weitergeben. 🐧
+Issues und Pull Requests sind willkommen. Änderungen bitte im Markdown machen
+und danach das HTML neu generieren (siehe oben), damit beide Dateien im PR
+zusammenpassen.
+
+## Lizenz
+
+[MIT](LICENSE) — frei verwendbar: kopieren, anpassen, weitergeben. 🐧
